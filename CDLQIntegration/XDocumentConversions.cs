@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Xml.Linq;
-using KSL.VehicleRegistrationLookupService.Shared.Models;
+using MKS.VehicleRegistrationLookupService.Shared.Models;
 
-namespace KSL.VehicleRegistrationLookupService.CDLQIntegration
+namespace MKS.VehicleRegistrationLookupService.CDLQIntegration
 {
     internal class XDocumentConversions
     {

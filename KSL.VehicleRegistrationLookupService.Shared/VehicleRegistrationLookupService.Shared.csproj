@@ -8,8 +8,8 @@
     <ProjectGuid>{70AF13E9-F8CE-4001-8092-3F586594A875}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KSL.VehicleRegistrationLookupService.Shared</RootNamespace>
-    <AssemblyName>KSL.VehicleRegistrationLookupService.Shared</AssemblyName>
+    <RootNamespace>MKS.VehicleRegistrationLookupService.Shared</RootNamespace>
+    <AssemblyName>MKS.VehicleRegistrationLookupService.Shared</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

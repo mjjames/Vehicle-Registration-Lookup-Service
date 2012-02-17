@@ -1,4 +1,4 @@
-﻿namespace KSL.VehicleRegistrationLookupService.Shared.Models
+﻿namespace MKS.VehicleRegistrationLookupService.Shared.Models
 {
     public class ServiceResult<T>
     {

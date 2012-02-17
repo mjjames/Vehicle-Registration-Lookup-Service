@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Specialized;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using KSL.VehicleRegistrationLookupService.Shared.Interfaces;
-using KSL.VehicleRegistrationLookupService.Shared.Models;
+using MKS.VehicleRegistrationLookupService.Shared.Interfaces;
+using MKS.VehicleRegistrationLookupService.Shared.Models;
 
-namespace KSL.VehicleRegistrationLookupService.CDLQIntegration
+namespace MKS.VehicleRegistrationLookupService.CDLQIntegration
 {
     public class VrmService : IVehicleLookupService
     {
@@ -74,7 +73,14 @@ namespace KSL.VehicleRegistrationLookupService.CDLQIntegration
             using (var serviceResult = RequestVehicleInformation(vehicleRegistrationMark, vehicleIdentificationNumber))
             {
                 //this is a syncronous operation so sit here waiting for the request to finish
-                serviceResult.Wait();
+                try
+                {
+                    serviceResult.Wait();
+                }
+                catch(AggregateException ex)
+                {
+                    // we are going to ignore aggregate exceptions as the retrieve result method handles them for us
+                }
                 return RetrieveServiceResult(serviceResult);
             }
         }

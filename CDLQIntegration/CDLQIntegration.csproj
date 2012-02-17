@@ -8,8 +8,8 @@
     <ProjectGuid>{DF4A3058-523E-4578-AB85-51CD7D4CD645}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KSL.VehicleRegistrationLookupService.CDLQIntegration</RootNamespace>
-    <AssemblyName>KSL.VehicleRegistrationLookupService.CDLQIntegration</AssemblyName>
+    <RootNamespace>MKS.VehicleRegistrationLookupService.CDLQIntegration</RootNamespace>
+    <AssemblyName>MKS.VehicleRegistrationLookupService.CDLQIntegration</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -45,9 +45,9 @@
     <Compile Include="XDocumentConversions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KSL.VehicleRegistrationLookupService.Shared\KSL.VehicleRegistrationLookupService.Shared.csproj">
+    <ProjectReference Include="..\KSL.VehicleRegistrationLookupService.Shared\VehicleRegistrationLookupService.Shared.csproj">
       <Project>{70AF13E9-F8CE-4001-8092-3F586594A875}</Project>
-      <Name>KSL.VehicleRegistrationLookupService.Shared</Name>
+      <Name>VehicleRegistrationLookupService.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

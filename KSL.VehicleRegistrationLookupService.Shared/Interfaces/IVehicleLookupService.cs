@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using KSL.VehicleRegistrationLookupService.Shared.Models;
+﻿using MKS.VehicleRegistrationLookupService.Shared.Models;
 
-namespace KSL.VehicleRegistrationLookupService.Shared.Interfaces
+namespace MKS.VehicleRegistrationLookupService.Shared.Interfaces
 {
     public interface IVehicleLookupService
     {

@@ -1,9 +1,9 @@
 ﻿using System;
-using KSL.VehicleRegistrationLookupService.CDLQIntegration;
-using KSL.VehicleRegistrationLookupService.Shared.Models;
+using MKS.VehicleRegistrationLookupService.CDLQIntegration;
+using MKS.VehicleRegistrationLookupService.Shared.Models;
 using Xunit;
 
-namespace KSL.VehicleRegistrationLookupService.Tests.CDLQIntegration
+namespace MKS.VehicleRegistrationLookupService.Tests.CDLQIntegration
 {
     public class ServiceAuthenticationTests
     {

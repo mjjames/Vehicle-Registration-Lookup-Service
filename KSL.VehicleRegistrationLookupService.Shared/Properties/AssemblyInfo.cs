@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("KSL.VehicleRegistrationLookupService.Shared")]
+[assembly: AssemblyTitle("MKS.VehicleRegistrationLookupService.Shared")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("KSL.VehicleRegistrationLookupService.Shared")]
-[assembly: AssemblyCopyright("Copyright ©  2012")]
+[assembly: AssemblyCompany("MK Software Solutions")]
+[assembly: AssemblyProduct("MKS.VehicleRegistrationLookupService")]
+[assembly: AssemblyCopyright("Copyright ©  2012 MK Software Solutions")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

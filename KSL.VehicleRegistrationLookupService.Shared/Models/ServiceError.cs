@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace KSL.VehicleRegistrationLookupService.Shared.Models
+namespace MKS.VehicleRegistrationLookupService.Shared.Models
 {
     public class ServiceError
     {
