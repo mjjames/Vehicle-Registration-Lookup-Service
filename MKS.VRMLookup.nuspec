@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>MKS.VRMLookup</id>
+        <version>1.0.0.0</version>
+        <title>MKS VRM Lookup</title>
+        <authors>MKSoftware</authors>
+        <owners>MKSoftware</owners>
+        <projectUrl>http://mksoftwaresolutions.co.uk</projectUrl>
+        <iconUrl>http://mksoftwaresolutions.co.uk/images/mksoftware-110.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Provides a wrapper around the CDLQ VRM Lookup Service</description>
+        <copyright>Copyright MK Software Solutions 2012</copyright>
+        <tags>CDLQ MKSoftware</tags>
+    </metadata>
+    <files>
+        <file src="CDLQIntegration\bin\Release\MKS.VehicleRegistrationLookupService.CDLQIntegration.dll" target="lib\MKS.VehicleRegistrationLookupService.CDLQIntegration.dll" />
+        <file src="CDLQIntegration\bin\Release\MKS.VehicleRegistrationLookupService.CDLQIntegration.pdb" target="lib\MKS.VehicleRegistrationLookupService.CDLQIntegration.pdb" />
+        <file src="CDLQIntegration\bin\Release\MKS.VehicleRegistrationLookupService.Shared.dll" target="lib\MKS.VehicleRegistrationLookupService.Shared.dll" />
+        <file src="CDLQIntegration\bin\Release\MKS.VehicleRegistrationLookupService.Shared.pdb" target="lib\MKS.VehicleRegistrationLookupService.Shared.pdb" />
+    </files>
+</package>
