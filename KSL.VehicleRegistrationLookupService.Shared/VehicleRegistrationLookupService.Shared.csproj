@@ -78,6 +78,8 @@
   <ItemGroup>
     <Compile Include="Interfaces\IVehicleLookupService.cs" />
     <Compile Include="Models\BaseVehicleInformation.cs" />
+    <Compile Include="Models\EnhancedVehicleInformation.cs" />
+    <Compile Include="Models\FuelType.cs" />
     <Compile Include="Models\ServiceCredentials.cs" />
     <Compile Include="Models\ServiceError.cs" />
     <Compile Include="Models\ServiceResult.cs" />

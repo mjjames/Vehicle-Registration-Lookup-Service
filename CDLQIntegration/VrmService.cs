@@ -56,9 +56,32 @@ namespace MKS.VehicleRegistrationLookupService.CDLQIntegration
         /// </summary>
         /// <param name="vehicleRegistrationMark">The registration of the vehicle</param>
         /// <returns>The base information of a vehicle</returns>
-        public ServiceResult<BaseVehicleInformation> VrmLookup(string vehicleRegistrationMark)
+        public ServiceResult<EnhancedVehicleInformation> VrmLookup(string vehicleRegistrationMark)
         {
             return VrmLookup(vehicleRegistrationMark, string.Empty);
+        }
+
+        /// <summary>
+        /// Lookup a vehicles base information using its VRM
+        /// </summary>
+        /// <param name="vehicleRegistrationMark">The registration of the vehicle</param>
+        /// <returns>The base information of a vehicle</returns>
+        public ServiceResult<BaseVehicleInformation> BasicVrmLookup(string vehicleRegistrationMark)
+        {
+            //request the data from the service
+            using (var serviceResult = RequestVehicleInformation(vehicleRegistrationMark, string.Empty))
+            {
+                //this is a syncronous operation so sit here waiting for the request to finish
+                try
+                {
+                    serviceResult.Wait();
+                }
+                catch (AggregateException ex)
+                {
+                    // we are going to ignore aggregate exceptions as the retrieve result method handles them for us
+                }
+                return RetrieveServiceResult<BaseVehicleInformation>(serviceResult);
+            }
         }
 
         /// <summary>
@@ -67,7 +90,7 @@ namespace MKS.VehicleRegistrationLookupService.CDLQIntegration
         /// <param name="vehicleRegistrationMark">The registration of the vehicle</param>
         /// <param name="vehicleIdentificationNumber">The identification number of the vehicle</param>
         /// <returns></returns>
-        public ServiceResult<BaseVehicleInformation> VrmLookup(string vehicleRegistrationMark, string vehicleIdentificationNumber)
+        public ServiceResult<EnhancedVehicleInformation> VrmLookup(string vehicleRegistrationMark, string vehicleIdentificationNumber)
         {
             //request the data from the service
             using (var serviceResult = RequestVehicleInformation(vehicleRegistrationMark, vehicleIdentificationNumber))
@@ -81,7 +104,7 @@ namespace MKS.VehicleRegistrationLookupService.CDLQIntegration
                 {
                     // we are going to ignore aggregate exceptions as the retrieve result method handles them for us
                 }
-                return RetrieveServiceResult(serviceResult);
+                return RetrieveServiceResult<EnhancedVehicleInformation>(serviceResult);
             }
         }
 
@@ -90,7 +113,7 @@ namespace MKS.VehicleRegistrationLookupService.CDLQIntegration
         /// </summary>
         /// <param name="serviceResult">Complete task returning an xdocument</param>
         /// <returns></returns>
-        private ServiceResult<BaseVehicleInformation> RetrieveServiceResult(Task<XDocument> serviceResult)
+        private ServiceResult<T> RetrieveServiceResult<T>(Task<XDocument> serviceResult) where T : BaseVehicleInformation
         {
             if (!serviceResult.IsCompleted)
             {
@@ -99,7 +122,7 @@ namespace MKS.VehicleRegistrationLookupService.CDLQIntegration
 
             if (serviceResult.IsFaulted)
             {
-                return new ServiceResult<BaseVehicleInformation>(_serviceCredentials,
+                return new ServiceResult<T>(_serviceCredentials,
                                                                  new ServiceError { Exception = serviceResult.Exception });
             }
 
@@ -110,19 +133,24 @@ namespace MKS.VehicleRegistrationLookupService.CDLQIntegration
             //if it did return the service result with the error
             if (error != null)
             {
-                return new ServiceResult<BaseVehicleInformation>(_serviceCredentials, error);
+                return new ServiceResult<T>(_serviceCredentials, error);
             }
 
             //we try catch incase the xml is invalid
             try
             {
                 //otherwise go convert the xml into the vehicle information object and return the service result
-                return new ServiceResult<BaseVehicleInformation>(_serviceCredentials,
-                                                                 conversion.BasicVehicleInformation());
+                if (typeof(T) == typeof(EnhancedVehicleInformation))
+                {
+                    return new ServiceResult<T>(_serviceCredentials,
+                                                                 conversion.EnhancedVehicleInformation() as T);
+                }
+                return new ServiceResult<T>(_serviceCredentials, conversion.BasicVehicleInformation() as T);
+                
             }
             catch (Exception e)
             {
-                return new ServiceResult<BaseVehicleInformation>(_serviceCredentials, new ServiceError { Exception = e });
+                return new ServiceResult<T>(_serviceCredentials, new ServiceError { Exception = e });
             }
         }
 

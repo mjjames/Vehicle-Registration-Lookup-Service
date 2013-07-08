@@ -13,6 +13,34 @@ namespace MKS.VehicleRegistrationLookupService.Tests.CDLQIntegration
 
 
         [Fact]
+        public void BasicValidVrm()
+        {
+            //create the credentials
+            var credentials = new ServiceCredentials
+            {
+                AuthenticationKey = AuthenticationKey,
+                IsInTestMode = true,
+                ServiceEndPoint = _endpoint,
+                Username = Username
+            };
+            //create the service
+            var service = new VrmService(credentials);
+            //make a request for a valid test reg
+            var result = service.BasicVrmLookup("DA70XSC");
+
+            var expected = new BaseVehicleInformation
+                               {
+                                   Make = "FORD",
+                                   Model = "FOCUS ZETEC CLIMATE 116",
+                                   EngineSize = 1596
+                               };
+
+            //ensure we aren't faulted
+            Assert.False(result.IsFaulted);
+            Assert.Equal(expected, result.Result);
+        }
+
+        [Fact]
         public void ValidVrm()
         {
             //create the credentials
@@ -28,16 +56,24 @@ namespace MKS.VehicleRegistrationLookupService.Tests.CDLQIntegration
             //make a request for a valid test reg
             var result = service.VrmLookup("DA70XSC");
 
-            var expected = new BaseVehicleInformation
-                               {
-                                   Make = "FORD",
-                                   Model = "FOCUS ZETEC CLIMATE 116",
-                                   EngineSize = 1596
-                               };
+            var expected = new EnhancedVehicleInformation
+            {
+                Make = "FORD",
+                Model = "FOCUS ZETEC CLIMATE 116",
+                EngineSize = 1596,
+                Vin = "A22322C2F9D5CC939",
+                Doors = "5 DOORS",
+                Seats = 5,
+                EngineNumber = "86DAF26",
+                FuelType = FuelType.Petrol,
+                Wheelplan = "2 AXLE RIGID BODY"
+            };
 
             //ensure we aren't faulted
             Assert.False(result.IsFaulted);
             Assert.Equal(expected, result.Result);
         }
+
+        
     }
 }

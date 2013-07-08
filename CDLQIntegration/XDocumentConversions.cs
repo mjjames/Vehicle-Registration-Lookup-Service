@@ -63,5 +63,57 @@ namespace MKS.VehicleRegistrationLookupService.CDLQIntegration
             //this will throw if we some how get multiple
             return info.Single();
         }
+
+        public EnhancedVehicleInformation EnhancedVehicleInformation()
+        {
+            //generate vehicle informations from the result data
+            var info = from result in _document.Descendants("result")
+                       select new EnhancedVehicleInformation()
+                       {
+                           EngineSize = int.Parse(result.Element("engine_size").Value),
+                           Make = result.Element("make").Value,
+                           Model = result.Element("model").Value,
+                           Seats = int.Parse(result.Element("seats").Value == "0"? result.Element("smmt_no_of_seats_mv").Value : result.Element("seats").Value),
+                           Doors = result.Element("doors").Value,
+                           EngineNumber = result.Element("engine_number").Value,
+                           Vin = result.Element("vin").Value,
+                           Wheelplan = result.Element("wheelplan").Value,
+                           FuelType = GetFuelType(result.Element("fuel").Value)
+                       };
+            //we should only ever have one result so use single
+            //this will throw if we some how get multiple
+            return info.Single();
+        }
+
+        private FuelType GetFuelType(string value)
+        {
+            switch (value.ToUpper())
+            {
+                case "PETROL":
+                    return FuelType.Petrol;
+                case "HEAVY OIL":
+                    return FuelType.Diesel;
+                case "ELECTRICITY":
+                    return FuelType.Electric;
+                case "STEAM":
+                    return FuelType.Steam;
+                case "GAS":
+                    return FuelType.Lpg;
+                case "PETROL/GAS":
+                    return FuelType.PetrolLpg;
+                case "GAS BI-FUEL":
+                    return FuelType.GasBiFuel;
+                case "HYBRID ELECTRIC":
+                    return FuelType.HybridElectric;
+                case "GAS DIESEL":
+                    return FuelType.GasDiesel;
+                case "FUEL CELLS":
+                    return FuelType.FuelCell;
+                case "ELECTRIC DIESEL":
+                    return FuelType.ElectricDiesel;
+                default:
+                    return FuelType.Other;
+            }
+        }
     }
 }
