@@ -83,6 +83,10 @@
     <Compile Include="Models\ServiceCredentials.cs" />
     <Compile Include="Models\ServiceError.cs" />
     <Compile Include="Models\ServiceResult.cs" />
+    <Compile Include="Models\TyreInformation.cs" />
+    <Compile Include="Models\TyrePressure.cs" />
+    <Compile Include="Models\TyreSize.cs" />
+    <Compile Include="Models\VehicleTyreInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

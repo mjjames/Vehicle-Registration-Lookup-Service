@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleRegistrationLookupSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDLQIntegration.Tests", "Tests\CDLQIntegration.Tests\CDLQIntegration.Tests.csproj", "{6B5B62FC-9653-4864-9321-D5A6FA114D60}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KwickFitIntegration", "KwickFitIntegration\KwickFitIntegration.csproj", "{A76FCF3A-3D26-4877-AEA1-2A826D8FD345}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KwickFitIntegration.Tests", "KwickFitIntegration.Tests\KwickFitIntegration.Tests.csproj", "{FBAB018E-020A-4F9A-99EF-7F532E08F4A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,14 @@ Global
 		{6B5B62FC-9653-4864-9321-D5A6FA114D60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B5B62FC-9653-4864-9321-D5A6FA114D60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B5B62FC-9653-4864-9321-D5A6FA114D60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A76FCF3A-3D26-4877-AEA1-2A826D8FD345}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A76FCF3A-3D26-4877-AEA1-2A826D8FD345}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A76FCF3A-3D26-4877-AEA1-2A826D8FD345}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A76FCF3A-3D26-4877-AEA1-2A826D8FD345}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBAB018E-020A-4F9A-99EF-7F532E08F4A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBAB018E-020A-4F9A-99EF-7F532E08F4A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBAB018E-020A-4F9A-99EF-7F532E08F4A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBAB018E-020A-4F9A-99EF-7F532E08F4A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
