@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Xml.Linq;
 using MKS.VehicleRegistrationLookupService.Shared.Models;
 
-namespace KwickFitIntegration
+namespace MKS.KwickFitIntegration
 {
     public class XDocumentConversions
     {

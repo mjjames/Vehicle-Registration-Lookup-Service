@@ -1,68 +1,41 @@
-﻿using System.Xml.Linq;
+﻿using System;
 using MKS.KwickFitIntegration;
 using MKS.VehicleRegistrationLookupService.Shared.Models;
 using Xunit;
 
 namespace KwickFitIntegration.Tests
 {
-    public class XDocumentConversionTests
+    public class ServiceTests
     {
 
         [Fact]
-        public void MakeModelParsed()
+        public async void MakeModelParsed()
         {
             var expected = new BaseVehicleInformation
+            {
+                EngineSize = 1910,
+                Make = "FIAT",
+                Model = "BRAVO"
+            };
+            var service = new TyreLookupService(new ServiceCredentials
                 {
-                    EngineSize = 1910,
-                    Make = "FIAT",
-                    Model = "BRAVO"
-                };
-            var xDocument = XDocument.Parse(Resources.ValidResponseTestData);
-            var baseInfo = XDocumentConversions.BaseVehicleInformation(xDocument);
-            Assert.Equal(expected, baseInfo);
+                    ServiceEndPoint = new Uri("http://www.kwik-fit.com/ajax/tyre-pressure-search/tyre-pressure-data.asp")
+                });
+            var baseInfo = await service.GetBaseInfo("MT57XAJ");
+            Assert.False(baseInfo.IsFaulted);
+            Assert.Equal(expected, baseInfo.Result);
         }
 
-        [Fact]
-        public void SingleTyreParsed()
-        {
-            var expected = new TyreInformation
-                {
-                    LadenPressure = new TyrePressure
-                        {
-                            Front = 2.6f,
-                            Rear = 2.6f
-                        },
-                    LoadIndex = 91,
-                    NutTorque = 90,
-                    Pressure = new TyrePressure
-                        {
-                            Front = 2.3f,
-                            Rear = 2.3f
-                        },
-                    RimOffset = 31,
-                    RimSize = "7x16",
-                    Size = new TyreSize
-                        {
-                            Size = 16,
-                            Profile = 55,
-                            Width = 205
-                        },
-                    SpeedIndex = 'V'
-                };
-            var element = XDocument.Parse(Resources.ValidSingleTyre).Root;
-            var tyre = XDocumentConversions.TyreInformation(element);
-            Assert.Equal(expected, tyre);
-        }
 
         [Fact]
-        public void FullResponseParsed()
+        public async void FullResponseParsed()
         {
             var expected = new VehicleTyreInformation
-                {
-                    EngineSize = 1910,
-                    Make = "FIAT",
-                    Model = "BRAVO",
-                    TyreInformation =
+            {
+                EngineSize = 1910,
+                Make = "FIAT",
+                Model = "BRAVO",
+                TyreInformation =
                         {
                            new TyreInformation
                 {
@@ -138,10 +111,47 @@ namespace KwickFitIntegration.Tests
                                 SpeedIndex = 'V'
                 },
                         }
-                };
-            var xDocument = XDocument.Parse(Resources.ValidResponseTestData);
-            var tyreInfo = XDocumentConversions.VehicleTyreInformation(xDocument);
-            Assert.Equal(expected, tyreInfo);
+            };
+            var service = new TyreLookupService(new ServiceCredentials
+            {
+                ServiceEndPoint = new Uri("http://www.kwik-fit.com/ajax/tyre-pressure-search/tyre-pressure-data.asp")
+            });
+            var tyreInfo = await  service.GetTyreInfo("MT57XAJ");
+            Assert.False(tyreInfo.IsFaulted);
+            Assert.Equal(expected, tyreInfo.Result);
+        }
+
+        [Fact]
+        public async void InvalidEndpointGetBaseInfo()
+        {
+            //create the credentials
+            var credentials = new ServiceCredentials
+            {
+                ServiceEndPoint = new Uri("http://helloworld.net"),
+            };
+            //create the service
+            var service = new TyreLookupService(credentials);
+            //make a request for a valid test reg
+            var result = await service.GetBaseInfo("DA70XSC");
+            //ensure we aren't faulted
+            Assert.True(result.IsFaulted);
+        }
+
+
+        [Fact]
+        public async void InvalidEndpointGetTyreInfo()
+        {
+            //create the credentials
+            var credentials = new ServiceCredentials
+            {
+                ServiceEndPoint = new Uri("http://helloworld.net"),
+            };
+            //create the service
+            var service = new TyreLookupService(credentials);
+            //make a request for a valid test reg
+            var result = await service.GetTyreInfo("DA70XSC");
+            //ensure we aren't faulted
+            Assert.True(result.IsFaulted);
         }
     }
 }
