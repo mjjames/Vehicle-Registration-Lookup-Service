@@ -19,13 +19,13 @@ namespace MKS.VehicleRegistrationLookupService.Shared.Models
             unchecked
             {
                 int hashCode = (Size != null ? Size.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (Pressure != null ? Pressure.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (LadenPressure != null ? LadenPressure.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ NutTorque;
-                hashCode = (hashCode*397) ^ (RimSize != null ? RimSize.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ RimOffset;
-                hashCode = (hashCode*397) ^ LoadIndex;
-                hashCode = (hashCode*397) ^ SpeedIndex.GetHashCode();
+                hashCode = (hashCode * 397) ^ (Pressure != null ? Pressure.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (LadenPressure != null ? LadenPressure.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ NutTorque;
+                hashCode = (hashCode * 397) ^ (RimSize != null ? RimSize.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ RimOffset;
+                hashCode = (hashCode * 397) ^ LoadIndex;
+                hashCode = (hashCode * 397) ^ SpeedIndex.GetHashCode();
                 return hashCode;
             }
         }
@@ -54,7 +54,7 @@ namespace MKS.VehicleRegistrationLookupService.Shared.Models
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((TyreInformation) obj);
+            return Equals((TyreInformation)obj);
         }
     }
 }

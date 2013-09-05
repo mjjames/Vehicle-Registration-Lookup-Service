@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\ITyreLookupService.cs" />
     <Compile Include="Interfaces\IVehicleLookupService.cs" />
     <Compile Include="Models\BaseVehicleInformation.cs" />
     <Compile Include="Models\EnhancedVehicleInformation.cs" />

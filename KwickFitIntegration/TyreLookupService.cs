@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using MKS.VehicleRegistrationLookupService.Shared.Interfaces;
 using MKS.VehicleRegistrationLookupService.Shared.Models;
 
 namespace MKS.KwickFitIntegration
 {
-    public class TyreLookupService
+    public class TyreLookupService : ITyreLookupService
     {
         
         private readonly ServiceCredentials _serviceCredentials;
