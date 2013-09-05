@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using MKS.VehicleRegistrationLookupService.CDLQIntegration;
 using MKS.VehicleRegistrationLookupService.Shared.Models;
 using Xunit;
@@ -13,7 +14,7 @@ namespace MKS.VehicleRegistrationLookupService.Tests.CDLQIntegration
 
 
         [Fact]
-        public void ValidEndpointUsernameAndAuthenticationKey()
+        public async Task ValidEndpointUsernameAndAuthenticationKey()
         {
             //create the credentials
             var credentials = new ServiceCredentials
@@ -26,13 +27,13 @@ namespace MKS.VehicleRegistrationLookupService.Tests.CDLQIntegration
             //create the service
             var service = new VrmService(credentials);
             //make a request for a valid test reg
-            var result = service.VrmLookup("DA70XSC");
+            var result = await service.VrmLookup("DA70XSC");
             //ensure we aren't faulted
             Assert.False(result.IsFaulted);
         }
 
         [Fact]
-        public void ValidEndpointUsernameAndInvalidAuthenticationKey()
+        public async Task ValidEndpointUsernameAndInvalidAuthenticationKey()
         {
             //create the credentials
             var credentials = new ServiceCredentials
@@ -45,13 +46,13 @@ namespace MKS.VehicleRegistrationLookupService.Tests.CDLQIntegration
             //create the service
             var service = new VrmService(credentials);
             //make a request for a valid test reg
-            var result = service.VrmLookup("DA70XSC");
+            var result = await service.VrmLookup("DA70XSC");
             //ensure we aren't faulted
             Assert.True(result.IsFaulted);
         }
 
         [Fact]
-        public void ValidEndpointAndInvalidUsernameAndAuthenticationKey()
+        public async Task ValidEndpointAndInvalidUsernameAndAuthenticationKey()
         {
             //create the credentials
             var credentials = new ServiceCredentials
@@ -64,7 +65,7 @@ namespace MKS.VehicleRegistrationLookupService.Tests.CDLQIntegration
             //create the service
             var service = new VrmService(credentials);
             //make a request for a valid test reg
-            var result = service.VrmLookup("DA70XSC");
+            var result = await service.VrmLookup("DA70XSC");
             //ensure we aren't faulted
             Assert.True(result.IsFaulted);
         }

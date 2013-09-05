@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using MKS.VehicleRegistrationLookupService.CDLQIntegration;
 using MKS.VehicleRegistrationLookupService.Shared.Models;
 using Xunit;
@@ -13,7 +14,7 @@ namespace MKS.VehicleRegistrationLookupService.Tests.CDLQIntegration
 
 
         [Fact]
-        public void BasicValidVrm()
+        public async Task BasicValidVrm()
         {
             //create the credentials
             var credentials = new ServiceCredentials
@@ -26,7 +27,7 @@ namespace MKS.VehicleRegistrationLookupService.Tests.CDLQIntegration
             //create the service
             var service = new VrmService(credentials);
             //make a request for a valid test reg
-            var result = service.BasicVrmLookup("DA70XSC");
+            var result = await service.BasicVrmLookup("DA70XSC");
 
             var expected = new BaseVehicleInformation
                                {
@@ -41,7 +42,7 @@ namespace MKS.VehicleRegistrationLookupService.Tests.CDLQIntegration
         }
 
         [Fact]
-        public void ValidVrm()
+        public async Task ValidVrm()
         {
             //create the credentials
             var credentials = new ServiceCredentials
@@ -54,7 +55,7 @@ namespace MKS.VehicleRegistrationLookupService.Tests.CDLQIntegration
             //create the service
             var service = new VrmService(credentials);
             //make a request for a valid test reg
-            var result = service.VrmLookup("DA70XSC");
+            var result = await service.VrmLookup("DA70XSC");
 
             var expected = new EnhancedVehicleInformation
             {

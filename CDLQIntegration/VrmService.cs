@@ -56,7 +56,7 @@ namespace MKS.VehicleRegistrationLookupService.CDLQIntegration
         /// </summary>
         /// <param name="vehicleRegistrationMark">The registration of the vehicle</param>
         /// <returns>The base information of a vehicle</returns>
-        public ServiceResult<EnhancedVehicleInformation> VrmLookup(string vehicleRegistrationMark)
+        public Task<ServiceResult<EnhancedVehicleInformation>> VrmLookup(string vehicleRegistrationMark)
         {
             return VrmLookup(vehicleRegistrationMark, string.Empty);
         }
@@ -66,22 +66,20 @@ namespace MKS.VehicleRegistrationLookupService.CDLQIntegration
         /// </summary>
         /// <param name="vehicleRegistrationMark">The registration of the vehicle</param>
         /// <returns>The base information of a vehicle</returns>
-        public ServiceResult<BaseVehicleInformation> BasicVrmLookup(string vehicleRegistrationMark)
+        public async Task<ServiceResult<BaseVehicleInformation>> BasicVrmLookup(string vehicleRegistrationMark)
         {
             //request the data from the service
-            using (var serviceResult = RequestVehicleInformation(vehicleRegistrationMark, string.Empty))
+            try
             {
-                //this is a syncronous operation so sit here waiting for the request to finish
-                try
-                {
-                    serviceResult.Wait();
-                }
-                catch (AggregateException ex)
-                {
-                    // we are going to ignore aggregate exceptions as the retrieve result method handles them for us
-                }
+                var serviceResult = await RequestVehicleInformation(vehicleRegistrationMark, string.Empty);
                 return RetrieveServiceResult<BaseVehicleInformation>(serviceResult);
             }
+            catch (Exception ex)
+            {
+                return new ServiceResult<BaseVehicleInformation>(_serviceCredentials,
+                                                                new ServiceError { Exception = ex });
+            }
+
         }
 
         /// <summary>
@@ -90,21 +88,18 @@ namespace MKS.VehicleRegistrationLookupService.CDLQIntegration
         /// <param name="vehicleRegistrationMark">The registration of the vehicle</param>
         /// <param name="vehicleIdentificationNumber">The identification number of the vehicle</param>
         /// <returns></returns>
-        public ServiceResult<EnhancedVehicleInformation> VrmLookup(string vehicleRegistrationMark, string vehicleIdentificationNumber)
+        public async Task<ServiceResult<EnhancedVehicleInformation>> VrmLookup(string vehicleRegistrationMark, string vehicleIdentificationNumber)
         {
-            //request the data from the service
-            using (var serviceResult = RequestVehicleInformation(vehicleRegistrationMark, vehicleIdentificationNumber))
+            try
             {
-                //this is a syncronous operation so sit here waiting for the request to finish
-                try
-                {
-                    serviceResult.Wait();
-                }
-                catch(AggregateException ex)
-                {
-                    // we are going to ignore aggregate exceptions as the retrieve result method handles them for us
-                }
+                //request the data from the service
+                var serviceResult = await RequestVehicleInformation(vehicleRegistrationMark, vehicleIdentificationNumber);
                 return RetrieveServiceResult<EnhancedVehicleInformation>(serviceResult);
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResult<EnhancedVehicleInformation>(_serviceCredentials,
+                                                                new ServiceError { Exception = ex });
             }
         }
 
@@ -113,20 +108,9 @@ namespace MKS.VehicleRegistrationLookupService.CDLQIntegration
         /// </summary>
         /// <param name="serviceResult">Complete task returning an xdocument</param>
         /// <returns></returns>
-        private ServiceResult<T> RetrieveServiceResult<T>(Task<XDocument> serviceResult) where T : BaseVehicleInformation
+        private ServiceResult<T> RetrieveServiceResult<T>(XDocument document) where T : BaseVehicleInformation
         {
-            if (!serviceResult.IsCompleted)
-            {
-                throw new ApplicationException("Tried to retrieve service result before task had completed");
-            }
-
-            if (serviceResult.IsFaulted)
-            {
-                return new ServiceResult<T>(_serviceCredentials,
-                                                                 new ServiceError { Exception = serviceResult.Exception });
-            }
-
-            var conversion = new XDocumentConversions(serviceResult.Result);
+            var conversion = new XDocumentConversions(document);
 
             //see if our service returned an error
             var error = conversion.ErrorDetails();
@@ -146,7 +130,7 @@ namespace MKS.VehicleRegistrationLookupService.CDLQIntegration
                                                                  conversion.EnhancedVehicleInformation() as T);
                 }
                 return new ServiceResult<T>(_serviceCredentials, conversion.BasicVehicleInformation() as T);
-                
+
             }
             catch (Exception e)
             {
