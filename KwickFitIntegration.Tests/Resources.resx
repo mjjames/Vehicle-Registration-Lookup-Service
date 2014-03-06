@@ -198,4 +198,16 @@
           &lt;WTDRVIN&gt;198&lt;/WTDRVIN&gt;
         &lt;/DRDITEMS&gt;</value>
   </data>
+  <data name="ValidSingleTyreNoPressures" xml:space="preserve">
+    <value>&lt;DRDITEMS&gt;
+  &lt;OPTION&gt;1&lt;/OPTION&gt;
+  &lt;DRD&gt;14847&lt;/DRD&gt;
+  &lt;TYRESIZE&gt;205/70R16&lt;/TYRESIZE&gt;
+  &lt;LOADINDEX&gt;104&lt;/LOADINDEX&gt;
+  &lt;SPEEDINDEX&gt;S&lt;/SPEEDINDEX&gt;
+  &lt;RIMSIZE&gt;5.5x16&lt;/RIMSIZE&gt;
+  &lt;RIMOFFSET&gt;50&lt;/RIMOFFSET&gt;
+  &lt;NUTBOLTTORQUE&gt;160&lt;/NUTBOLTTORQUE&gt;
+&lt;/DRDITEMS&gt;</value>
+  </data>
 </root>

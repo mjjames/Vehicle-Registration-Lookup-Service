@@ -31,26 +31,63 @@ namespace MKS.KwickFitIntegration
                     Size = int.Parse(profileSegments[1]),
                     Profile = int.Parse(profileSegments[0])
                 };
+
+            var ladenPressure = GetLadenPressure(element);
+            var tyrePressure = GetTyrePressure(element);
+
             return new TyreInformation
             {
-                LadenPressure = new TyrePressure
-                    {
-                        Front = float.Parse(element.Element("LADENTPFRONT").Value),
-                        Rear = float.Parse(element.Element("LADENTPREAR").Value)
-                    },
-                    LoadIndex = int.Parse(element.Element("LOADINDEX").Value),
-                    NutTorque = int.Parse(element.Element("NUTBOLTTORQUE").Value),
-                    Pressure = new TyrePressure
-                        {
-                            Front = float.Parse(element.Element("TYREPRESSURE").Value),
-                            Rear = float.Parse(element.Element("TYREPRESSUREREAR").Value)
-                        },
-                        RimOffset = int.Parse(element.Element("RIMOFFSET").Value),
-                        RimSize = element.Element("RIMSIZE").Value,
-                        Size = tyreSize,
-                        SpeedIndex = element.Element("SPEEDINDEX").Value.First()
-
+                LadenPressure = ladenPressure,
+                LoadIndex = int.Parse(element.Element("LOADINDEX").Value),
+                NutTorque = int.Parse(element.Element("NUTBOLTTORQUE").Value),
+                Pressure = tyrePressure,
+                RimOffset = int.Parse(element.Element("RIMOFFSET").Value),
+                RimSize = element.Element("RIMSIZE").Value,
+                Size = tyreSize,
+                SpeedIndex = element.Element("SPEEDINDEX").Value.First()
             };
+        }
+
+        private static TyrePressure GetTyrePressure(XElement element)
+        {
+            TyrePressure tyrePressure;
+            if (element.Element("TYREPRESSURE") != null && element.Element("TYREPRESSUREREAR") != null)
+            {
+                float frontPressure, rearPressure;
+                float.TryParse(element.Element("TYREPRESSURE").Value, out frontPressure);
+                float.TryParse(element.Element("TYREPRESSUREREAR").Value, out rearPressure);
+                tyrePressure = new TyrePressure
+                {
+                    Front = frontPressure,
+                    Rear = rearPressure
+                };
+            }
+            else
+            {
+                tyrePressure = new TyrePressure();
+            }
+            return tyrePressure;
+        }
+
+        private static TyrePressure GetLadenPressure(XElement element)
+        {
+            TyrePressure ladenPressure;
+            if (element.Element("LADENTPFRONT") != null && element.Element("LADENTPREAR") != null)
+            {
+                float frontPressure, rearPressure;
+                float.TryParse(element.Element("LADENTPFRONT").Value, out frontPressure);
+                float.TryParse(element.Element("LADENTPREAR").Value, out rearPressure);
+                ladenPressure = new TyrePressure
+                {
+                    Front = frontPressure,
+                    Rear = rearPressure
+                };
+            }
+            else
+            {
+                ladenPressure = new TyrePressure();
+            }
+            return ladenPressure;
         }
 
         public static VehicleTyreInformation VehicleTyreInformation(XDocument xDocument)

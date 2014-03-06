@@ -55,6 +55,38 @@ namespace KwickFitIntegration.Tests
         }
 
         [Fact]
+        public void SingleTyreWithoutPressureInformationParsed()
+        {
+            var expected = new TyreInformation
+            {
+                LadenPressure = new TyrePressure
+                {
+                    Front = 0,
+                    Rear = 0
+                },
+                LoadIndex = 104,
+                NutTorque = 160,
+                Pressure = new TyrePressure
+                {
+                    Front = 0,
+                    Rear = 0
+                },
+                RimOffset = 50,
+                RimSize = "5.5x16",
+                Size = new TyreSize
+                {
+                    Size = 16,
+                    Profile = 70,
+                    Width = 205
+                },
+                SpeedIndex = 'S'
+            };
+            var element = XDocument.Parse(Resources.ValidSingleTyreNoPressures).Root;
+            var tyre = XDocumentConversions.TyreInformation(element);
+            Assert.Equal(expected, tyre);
+        }
+
+        [Fact]
         public void FullResponseParsed()
         {
             var expected = new VehicleTyreInformation
