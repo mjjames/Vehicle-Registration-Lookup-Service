@@ -71,7 +71,7 @@ namespace MKS.VehicleRegistrationLookupService.Tests.CDLQIntegration
         }
 
         [Fact]
-        public void InvalidEndpoint()
+        public async Task InvalidEndpoint()
         {
             //create the credentials
             var credentials = new ServiceCredentials
@@ -84,7 +84,7 @@ namespace MKS.VehicleRegistrationLookupService.Tests.CDLQIntegration
             //create the service
             var service = new VrmService(credentials);
             //make a request for a valid test reg
-            var result = service.VrmLookup("DA70XSC");
+            var result = await service.VrmLookup("DA70XSC");
             //ensure we aren't faulted
             Assert.True(result.IsFaulted);
         }
