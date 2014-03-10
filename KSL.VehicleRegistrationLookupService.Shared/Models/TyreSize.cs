@@ -16,8 +16,8 @@ namespace MKS.VehicleRegistrationLookupService.Shared.Models
             unchecked
             {
                 int hashCode = Width;
-                hashCode = (hashCode*397) ^ Profile;
-                hashCode = (hashCode*397) ^ Size;
+                hashCode = (hashCode * 397) ^ Profile;
+                hashCode = (hashCode * 397) ^ Size;
                 return hashCode;
             }
         }
@@ -45,12 +45,20 @@ namespace MKS.VehicleRegistrationLookupService.Shared.Models
         /// </summary>
         public int Size { get; set; }
 
+        public bool HasValue
+        {
+            get
+            {
+                return Width > 0 && Size > 0 && Profile > 0;
+            }
+        }
+
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((TyreSize) obj);
+            return Equals((TyreSize)obj);
         }
     }
 }

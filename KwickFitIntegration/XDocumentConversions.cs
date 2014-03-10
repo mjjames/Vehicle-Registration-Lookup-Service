@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
 using MKS.VehicleRegistrationLookupService.Shared.Models;
+using System;
 
 namespace MKS.KwickFitIntegration
 {
@@ -23,15 +24,7 @@ namespace MKS.KwickFitIntegration
 
         public static TyreInformation TyreInformation(XElement element)
         {
-            var sizeSegments = element.Element("TYRESIZE").Value.Split('/');
-            var profileSegments = sizeSegments[1].Split('R');
-            var tyreSize = new TyreSize
-                {
-                    Width = int.Parse(sizeSegments[0]),
-                    Size = int.Parse(profileSegments[1]),
-                    Profile = int.Parse(profileSegments[0])
-                };
-
+            var tyreSize = GetTyreSize(element);
             var ladenPressure = GetLadenPressure(element);
             var tyrePressure = GetTyrePressure(element);
 
@@ -46,6 +39,30 @@ namespace MKS.KwickFitIntegration
                 Size = tyreSize,
                 SpeedIndex = element.Element("SPEEDINDEX").Value.First()
             };
+        }
+
+        private static TyreSize GetTyreSize(XElement element)
+        {
+            var tyreSizeElement = element.Element("TYRESIZE");
+            if (tyreSizeElement == null)
+            {
+                return new TyreSize();
+            }
+            var tyreSizeValue = tyreSizeElement.Value;
+            if (string.IsNullOrWhiteSpace(tyreSizeValue) || !tyreSizeValue.Contains("/") || !tyreSizeValue.Contains("R"))
+            {
+                return new TyreSize();
+            }
+
+            var sizeSegments = tyreSizeValue.Split('/');
+            var profileSegments = sizeSegments[1].Split('R');
+            var tyreSize = new TyreSize
+            {
+                Width = int.Parse(sizeSegments[0]),
+                Size = int.Parse(profileSegments[1]),
+                Profile = int.Parse(profileSegments[0])
+            };
+            return tyreSize;
         }
 
         private static TyrePressure GetTyrePressure(XElement element)
@@ -98,7 +115,7 @@ namespace MKS.KwickFitIntegration
                     EngineSize = baseInfo.EngineSize,
                     Make = baseInfo.Make,
                     Model = baseInfo.Model,
-                    TyreInformation = xDocument.Descendants("DRDITEMS").Select(TyreInformation).ToList()
+                    TyreInformation = xDocument.Descendants("DRDITEMS").Select(TyreInformation).Where(t => t.Size.HasValue).ToList()
                 };
 
             return tyreInfo;

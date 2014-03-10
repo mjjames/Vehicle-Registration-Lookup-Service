@@ -62,6 +62,29 @@ namespace KwickFitIntegration.Tests {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;xml version=&quot;1.0&quot; encoding=&quot;iso-8859-1&quot;&gt;
+        ///&lt;GEODS exp_cid=&quot;2JPK&quot;&gt;
+        ///&lt;REQUEST type=&quot;RETURN&quot; subtype=&quot;CALLBUR&quot; EXP_ExperianRef=&quot;&quot; success=&quot;Y&quot; timestamp=&quot;Mon, 10 Mar 2014 at 11:17 AM&quot; id=&quot;2JPK&quot;&gt;
+        ///&lt;MB45 seq=&quot;01&quot;&gt;
+        ///&lt;VRM&gt;DK51JYP&lt;/VRM&gt;
+        ///&lt;ENGINECAPACITY&gt;02500&lt;/ENGINECAPACITY&gt;
+        ///&lt;MAKE&gt;LDV&lt;/MAKE&gt;
+        ///&lt;MODEL&gt;CONVOY&lt;/MODEL&gt;
+        ///&lt;COLOUR&gt;WHITE&lt;/COLOUR&gt;
+        ///&lt;TRANSMISSION&gt;MANUAL 5 GEARS&lt;/TRANSMISSION&gt;
+        ///&lt;DOORPLANLITERAL&gt;PANEL VAN&lt;/DOORPLANLITERAL&gt;
+        ///&lt;TRANSMISSIONCODE&gt;M&lt;/TRANSMISSIONCODE&gt;
+        ///&lt;NUMBEROFDRDS&gt;2&lt;/NUMBEROFDRDS&gt;
+        ///&lt;DRDITEMS&gt;
+        ///&lt;OP [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string dk51jypRequest {
+            get {
+                return ResourceManager.GetString("dk51jypRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;xml version=&quot;1.0&quot; encoding=&quot;iso-8859-1&quot;&gt;
         ///  &lt;GEODS exp_cid=&apos;dOqI&apos;&gt;
         ///    &lt;REQUEST type=&apos;RETURN&apos; subtype=&apos;CALLBUR&apos; EXP_ExperianRef=&apos;&apos; success=&apos;Y&apos; timestamp=&apos;Tue, 20 Aug 2013 at 3:34 PM&apos; id=&apos;dOqI&apos;&gt;
         ///      &lt;MB45 seq=&apos;01&apos;&gt;

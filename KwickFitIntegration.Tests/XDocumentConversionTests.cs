@@ -175,5 +175,17 @@ namespace KwickFitIntegration.Tests
             var tyreInfo = XDocumentConversions.VehicleTyreInformation(xDocument);
             Assert.Equal(expected, tyreInfo);
         }
+
+        [Fact]
+        public void HandleInvalidTyreInformationRequest()
+        {
+            //our data is real data where the tyresize is missing the profile value
+            //we therefore have to skip the tyre during parse
+            var document = XDocument.Parse(Resources.dk51jypRequest);
+            Assert.NotNull(document);
+            var vehicle = XDocumentConversions.VehicleTyreInformation(document);
+            Assert.NotNull(vehicle);
+            Assert.Equal(1, vehicle.TyreInformation.Count);
+        }
     }
 }

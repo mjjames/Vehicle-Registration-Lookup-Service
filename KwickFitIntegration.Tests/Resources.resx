@@ -117,6 +117,47 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="dk51jypRequest" xml:space="preserve">
+    <value>&lt;xml version="1.0" encoding="iso-8859-1"&gt;
+&lt;GEODS exp_cid="2JPK"&gt;
+&lt;REQUEST type="RETURN" subtype="CALLBUR" EXP_ExperianRef="" success="Y" timestamp="Mon, 10 Mar 2014 at 11:17 AM" id="2JPK"&gt;
+&lt;MB45 seq="01"&gt;
+&lt;VRM&gt;DK51JYP&lt;/VRM&gt;
+&lt;ENGINECAPACITY&gt;02500&lt;/ENGINECAPACITY&gt;
+&lt;MAKE&gt;LDV&lt;/MAKE&gt;
+&lt;MODEL&gt;CONVOY&lt;/MODEL&gt;
+&lt;COLOUR&gt;WHITE&lt;/COLOUR&gt;
+&lt;TRANSMISSION&gt;MANUAL 5 GEARS&lt;/TRANSMISSION&gt;
+&lt;DOORPLANLITERAL&gt;PANEL VAN&lt;/DOORPLANLITERAL&gt;
+&lt;TRANSMISSIONCODE&gt;M&lt;/TRANSMISSIONCODE&gt;
+&lt;NUMBEROFDRDS&gt;2&lt;/NUMBEROFDRDS&gt;
+&lt;DRDITEMS&gt;
+&lt;OPTION&gt;1&lt;/OPTION&gt;
+&lt;DRD&gt;39887&lt;/DRD&gt;
+&lt;TYRESIZE&gt;195R14&lt;/TYRESIZE&gt;
+&lt;LOADINDEX&gt;099&lt;/LOADINDEX&gt;
+&lt;SPEEDINDEX&gt;R&lt;/SPEEDINDEX&gt;
+&lt;TYREPRESSURE&gt;2.8&lt;/TYREPRESSURE&gt;
+&lt;TYREPRESSUREREAR&gt;2.6&lt;/TYREPRESSUREREAR&gt;
+&lt;RIMSIZE&gt;5.5x14&lt;/RIMSIZE&gt;
+&lt;RIMOFFSET&gt;60&lt;/RIMOFFSET&gt;
+&lt;NUTBOLTTORQUE&gt;120&lt;/NUTBOLTTORQUE&gt;
+&lt;/DRDITEMS&gt;
+&lt;DRDITEMS&gt;
+&lt;OPTION&gt;2&lt;/OPTION&gt;
+&lt;DRD&gt;16231&lt;/DRD&gt;
+&lt;TYRESIZE&gt;205/65R15&lt;/TYRESIZE&gt;
+&lt;LOADINDEX&gt;106&lt;/LOADINDEX&gt;
+&lt;SPEEDINDEX&gt;R&lt;/SPEEDINDEX&gt;
+&lt;RIMSIZE&gt;6x15&lt;/RIMSIZE&gt;
+&lt;RIMOFFSET&gt;60&lt;/RIMOFFSET&gt;
+&lt;NUTBOLTTORQUE&gt;120&lt;/NUTBOLTTORQUE&gt;
+&lt;/DRDITEMS&gt;
+&lt;/MB45&gt;
+&lt;/REQUEST&gt;
+&lt;/GEODS&gt;
+&lt;/xml&gt;</value>
+  </data>
   <data name="ValidResponseTestData" xml:space="preserve">
     <value>&lt;xml version="1.0" encoding="iso-8859-1"&gt;
   &lt;GEODS exp_cid='dOqI'&gt;
