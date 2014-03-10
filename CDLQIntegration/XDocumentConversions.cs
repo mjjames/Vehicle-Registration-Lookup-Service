@@ -55,7 +55,7 @@ namespace MKS.VehicleRegistrationLookupService.CDLQIntegration
             var info = from result in _document.Descendants("result")
                        select new BaseVehicleInformation
                                   {
-                                      EngineSize = int.Parse(result.Element("engine_size").Value),
+                                      EngineSize = GetNumericValue(result.Element("engine_size").Value),
                                       Make = result.Element("make").Value,
                                       Model = result.Element("model").Value
                                   };
@@ -64,16 +64,23 @@ namespace MKS.VehicleRegistrationLookupService.CDLQIntegration
             return info.Single();
         }
 
+        private static int GetNumericValue(string value)
+        {
+            int numeric;
+            int.TryParse(value, out numeric);
+            return numeric;
+        }
+
         public EnhancedVehicleInformation EnhancedVehicleInformation()
         {
             //generate vehicle informations from the result data
             var info = from result in _document.Descendants("result")
                        select new EnhancedVehicleInformation()
                        {
-                           EngineSize = int.Parse(result.Element("engine_size").Value),
+                           EngineSize = GetNumericValue(result.Element("engine_size").Value),
                            Make = result.Element("make").Value,
                            Model = result.Element("model").Value,
-                           Seats = int.Parse(result.Element("seats").Value == "0"? result.Element("smmt_no_of_seats_mv").Value : result.Element("seats").Value),
+                           Seats = GetNumericValue(!string.IsNullOrWhiteSpace(result.Element("smmt_no_of_seats_mv").Value) ? result.Element("smmt_no_of_seats_mv").Value : result.Element("seats").Value),
                            Doors = result.Element("doors").Value,
                            EngineNumber = result.Element("engine_number").Value,
                            Vin = result.Element("vin").Value,
